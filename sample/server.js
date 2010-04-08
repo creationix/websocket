@@ -21,12 +21,12 @@ websocket.createServer(function (socket) {
   sys.debug("New client connected");
 
   function on_message(data) {
-    socket.send(data);
+    socket.write(data);
   }
   
   listeners.push(on_message);
   
-  socket.addListener("receive", function (data) {
+  socket.addListener("data", function (data) {
     data = data.
       replace(/&/g, "&amp;").
       replace(/</g, "&lt;").
@@ -37,7 +37,7 @@ websocket.createServer(function (socket) {
     });
   });
 
-  socket.addListener("eof", function () {
+  socket.addListener("end", function () {
     sys.debug("Client left");
     // Remove this connection from the listeners array
     listeners.splice(listeners.indexOf(on_message), 1);
