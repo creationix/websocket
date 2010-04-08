@@ -42,7 +42,12 @@ websocket.createServer(function (socket) {
     // Remove this connection from the listeners array
     listeners.splice(listeners.indexOf(on_message), 1);
     // And close the connection
-    socket.close();
+    socket.end();
   });
+  
+  // // Close the socket after 10 seconds
+  // setTimeout(function () {
+  //   socket.end();
+  // }, 10000)
 
 }).listen(8000, "0.0.0.0");
