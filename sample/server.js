@@ -45,4 +45,4 @@ websocket.createServer(function (socket) {
     socket.close();
   });
 
-}).listen(8000);
+}).listen(8000, "0.0.0.0");

@@ -2,14 +2,17 @@
 if ("WebSocket" in window) {
   
   var ws;
-  ws = new WebSocket("ws://localhost:8000/");
+  ws = new WebSocket("ws://127.0.0.1:8000/");
 
   ws.onopen = function () {
+    console.log("Open");
+    
     ws.send("I'm here");
     // Web Socket is connected. You can send data by send() method.
   };
 
   ws.onmessage = function (evt) {
+    console.log(evt);
     var message = evt.data,
         box = document.getElementById('messages');
     box.innerHTML += message + "\n";
