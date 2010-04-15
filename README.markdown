@@ -5,15 +5,14 @@
     var websocket = require("websocket");
     var server = websocket.createServer(function (socket) {
 
-      socket.addListener("connect", function () {
-        socket.send("hello\r\n");
+      socket.write("hello\r\n");
+
+      socket.addListener("data", function (data) {
+        socket.write(data);
       });
-      socket.addListener("receive", function (data) {
-        socket.send(data);
-      });
-      socket.addListener("eof", function () {
-        socket.send("goodbye\r\n");
-        socket.close();
+      socket.addListener("end", function () {
+        socket.write("goodbye\r\n");
+        socket.end();
       });
     });
     server.listen(7000, "localhost");
